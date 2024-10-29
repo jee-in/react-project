@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+/*
+ * 리액트에서는 JSX 문법을 사용해서 React component를 만들고, DOM에 렌더링시킴으로써 뷰를 그린다.
+ * JSX를 쓰면 자바스크립트 안에 html 태그 같은 마크업을 넣어 뷰 작업을 편하게 할 수 있다.
+ * const test_el = <div><h1>안녕</h1></div> 
+ * 위와 같은 태그는 정확히는 DOM 요소가 아니라 React DOM을 구성하는 React component이다.
+*/
+
+/* <---- 컴포넌트 밖 ----> */
+
+// 내가 필요한 파일을 import하기 
+import { useState } from 'react'              // js 파일
+import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css'                            // CSS 파일
 
 function App() {
+  /* <---- 컴포넌트 안 ----> */
   const [count, setCount] = useState(0)
 
+  const handleClick = () => {
+    alert('클릭!');
+  };
+
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    /* <---- HTML/JSX 영역  ----> */
+    // 자바스크립트를 쓸 수 있는 영역
+    <div
+      style={{
+        height: '100vh',
+        display: ' flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      { /* 이곳에 퀴즈를 위한 html 코드를 작성해 주세요 */ }
+      <p>이것은 내가 만든 App component입니다.</p>
+      <button type="button" onClick={handleClick}>클릭!</button>
+    </div>
   )
 }
 
+// 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기
 export default App
