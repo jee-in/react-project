@@ -17,37 +17,28 @@ import './App.css'                            // CSS 파일
 function App() {
   /* <---- 컴포넌트 안 ----> */
   const [count, setCount] = useState(0)
-  const content = "저녁 러닝";
-  const time = "20시"
-  const meal = "치킨";
-  const price = "20000원";
 
   return (
     <div>
-      <Todo todo={ content } time={ time } />
-      <Meal meal={ meal } price={ price } />
+      <Child1 />
+      <Child2 />
     </div>
   );
 }
 
-// 인자로 props 이용
-function Todo(props) {
-  return (
-    <div>
-      <h2>Todo</h2>
-      <p>{props.todo} <span>{props.time}</span></p>
-    </div>
-  );
+function Child1({ name }) {
+  // 부모가 이름을 전달해주기 전까지 쓸 default 값이 필요하다.
+  return <p>자식 이름은 { name }입니다.</p>
 }
 
-// 인자로 props를 구조분해하여 이용
-function Meal({ meal, price}) {
-  return (
-    <div>
-    <h2>Meal</h2>
-    <p>{meal} <span>{price}</span></p>
-  </div>
-  );
+// default props 지정하기 (1)
+Child1.defaultProps = {
+  name : "오지니"
+}
+
+// dafault props 지정하기 (2) : default argument
+function Child2({ name = "투틴" }) {
+  return <p>두 번째 자식 이름은 { name }입니다.</p>
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
