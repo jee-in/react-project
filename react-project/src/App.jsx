@@ -14,27 +14,26 @@ import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
 
-// 자식 컴포넌트
-function Child() {
-  return <div>나는 자식입니다.</div>
-}
-
-// 부모 컴포넌트
-function Parent() {
-  return <Child />;
-}
-
-// 할아버지 컴포넌트
-function GrandParent() {
-  return <Parent />
-}
-
 function App() {
   /* <---- 컴포넌트 안 ----> */
   const [count, setCount] = useState(0)
+  const name = "지인";
+  const number = 1;
+  const styles = {
+    backgroundColor: 'beige', 
+    fontSize: '20px'
+  }
 
-  // 자식 컴포넌트를 App Component에서 마치 HTML 태그를 쓰듯이 넣기
-  return <GrandParent />;
+  return (
+    // 리액트에서 반환할 수 있는 element는 1개이다.
+    // Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment <>...</>?
+    <div className="App">
+      <p style={styles}>안녕하세요. { name }입니다.</p>
+      <p>삼항연산자 { number > 10? number + '은 10보다 크다' : number + '은 10보다 작다' }</p>
+      <p style={{color: 'orange'}}>orange</p>
+      <input type='text'/>
+    </div>
+  );
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
