@@ -14,52 +14,40 @@ import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
 
-// prop driling의 예시
-// 부모에서 자식의 자식의 자식으로 데이터를 전달하기 위해 3번이나 데이터를 내려주고 있따.
-// props가 아래로 뚫고 내려간다고 하여 이러한 상황을 prop drilling이라고 한다.
-// 이와 같은 패턴은 피해야 한다. 이를 피하기 위해 나중에 'Redux'와 같은 데이터 상태관리 툴을 배우게 된다.
 function App() {
   /* <---- 컴포넌트 안 ----> */
   const [count, setCount] = useState(0)
-  
+  const content = "저녁 러닝";
+  const time = "20시"
+  const meal = "치킨";
+  const price = "20000원";
+
   return (
-    <div className="App">
-      <FirstComponent content="Who needs me?" />
+    <div>
+      <Todo todo={ content } time={ time } />
+      <Meal meal={ meal } price={ price } />
     </div>
   );
 }
 
-function FirstComponent({ content }) {
+// 인자로 props 이용
+function Todo(props) {
   return (
     <div>
-      {/* <h1>{ content }</h1> */}
-      <h3>I am the first component</h3>
-      <SecondComponent content={content} />
+      <h2>Todo</h2>
+      <p>{props.todo} <span>{props.time}</span></p>
     </div>
   );
 }
 
-function SecondComponent({ content }) {
+// 인자로 props를 구조분해하여 이용
+function Meal({ meal, price}) {
   return (
     <div>
-      <h3>I am the second component</h3>
-      <ThirdComponent content={content}/>
-    </div>
+    <h2>Meal</h2>
+    <p>{meal} <span>{price}</span></p>
+  </div>
   );
-}
-
-function ThirdComponent({ content }) {
-  return (
-    <div>
-      <h3>I am the third component.</h3>
-      <ComponentNeedingProps content={content}/>
-    </div>
-  )
-}
-
-// props 객체를 구조 분해하여 content 속성만 가져옴
-function ComponentNeedingProps({ content }) {
-  return <h3>{ content }</h3>;
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
