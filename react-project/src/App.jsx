@@ -14,37 +14,52 @@ import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
 
-// 자식 컴포넌트
-function Child(props) {
-  console.log(props);                         // 이게 바로 props다.
+// prop driling의 예시
+// 부모에서 자식의 자식의 자식으로 데이터를 전달하기 위해 3번이나 데이터를 내려주고 있따.
+// props가 아래로 뚫고 내려간다고 하여 이러한 상황을 prop drilling이라고 한다.
+// 이와 같은 패턴은 피해야 한다. 이를 피하기 위해 나중에 'Redux'와 같은 데이터 상태관리 툴을 배우게 된다.
+function App() {
+  /* <---- 컴포넌트 안 ----> */
+  const [count, setCount] = useState(0)
+  
+  return (
+    <div className="App">
+      <FirstComponent content="Who needs me?" />
+    </div>
+  );
+}
+
+function FirstComponent({ content }) {
   return (
     <div>
-      <p>나는 자식입니다.</p> 
-      <p>부모님 이름은 { props.parentName }입니다.</p>
-      <p>조부모님 이름은 {props.grandParentName} 입니다.</p>
+      {/* <h1>{ content }</h1> */}
+      <h3>I am the first component</h3>
+      <SecondComponent content={content} />
+    </div>
+  );
+}
+
+function SecondComponent({ content }) {
+  return (
+    <div>
+      <h3>I am the second component</h3>
+      <ThirdComponent content={content}/>
+    </div>
+  );
+}
+
+function ThirdComponent({ content }) {
+  return (
+    <div>
+      <h3>I am the third component.</h3>
+      <ComponentNeedingProps content={content}/>
     </div>
   )
 }
 
-// 부모 컴포넌트
-function Parent(props) {
-  const name = "김메다";
-  console.log(props);
-  return <Child parentName={name} grandParentName={props.grandParentName} />;           // props로 name을 전달함
-}
-
-// 할아버지 컴포넌트
-function GrandParent() {
-  const name = "옹심이";
-  return <Parent grandParentName={name}/>
-}
-
-function App() {
-  /* <---- 컴포넌트 안 ----> */
-  const [count, setCount] = useState(0)
-
-  // 자식 컴포넌트를 App Component에서 마치 HTML 태그를 쓰듯이 넣기
-  return <GrandParent />;
+// props 객체를 구조 분해하여 content 속성만 가져옴
+function ComponentNeedingProps({ content }) {
+  return <h3>{ content }</h3>;
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
