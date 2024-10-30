@@ -18,27 +18,26 @@ function App() {
   /* <---- 컴포넌트 안 ----> */
   const [count, setCount] = useState(0)
 
+  return <Parent />
+}
+
+// 부모-자식 컴포넌트를 이용하여 스타일링하기
+function Parent() {
+  const settings = {
+    color: 'blue',
+    fontSize: 20,
+    backgroundColor: 'lightgray'
+  };
+
+  return <Child {...settings} />;
+}
+
+function Child({ color, fontSize, backgroundColor }) {
   return (
-    <div>
-      <Child1 />
-      <Child2 />
+    <div style = {{ color, fontSize, backgroundColor }}>
+      자식 컴포넌트입니다.
     </div>
-  );
-}
-
-function Child1({ name }) {
-  // 부모가 이름을 전달해주기 전까지 쓸 default 값이 필요하다.
-  return <p>자식 이름은 { name }입니다.</p>
-}
-
-// default props 지정하기 (1)
-Child1.defaultProps = {
-  name : "오지니"
-}
-
-// dafault props 지정하기 (2) : default argument
-function Child2({ name = "투틴" }) {
-  return <p>두 번째 자식 이름은 { name }입니다.</p>
+  )
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
