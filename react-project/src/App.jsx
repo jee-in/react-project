@@ -15,18 +15,28 @@ import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
 
 // 자식 컴포넌트
-function Child() {
-  return <div>나는 자식입니다.</div>
+function Child(props) {
+  console.log(props);                         // 이게 바로 props다.
+  return (
+    <div>
+      <p>나는 자식입니다.</p> 
+      <p>부모님 이름은 { props.parentName }입니다.</p>
+      <p>조부모님 이름은 {props.grandParentName} 입니다.</p>
+    </div>
+  )
 }
 
 // 부모 컴포넌트
-function Parent() {
-  return <Child />;
+function Parent(props) {
+  const name = "김메다";
+  console.log(props);
+  return <Child parentName={name} grandParentName={props.grandParentName} />;           // props로 name을 전달함
 }
 
 // 할아버지 컴포넌트
 function GrandParent() {
-  return <Parent />
+  const name = "옹심이";
+  return <Parent grandParentName={name}/>
 }
 
 function App() {
