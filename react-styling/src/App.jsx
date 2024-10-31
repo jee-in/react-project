@@ -3,12 +3,30 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function Square({ user, deleteHandler }) {
+// 컴포넌트 분리하기
+
+// 1. 버튼 컴포넌트 생성
+function CustomButton({ color, className, onClick, children }) {
+  return (
+    <button 
+      style={{ color: color }}
+      className={className} 
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
+// User 컴포넌트를 분리해서 구현
+function User({ user, handleDelete }) {
   return (
     <div className="squareStyle" id= { user.key }>
       <div>{ user.name }</div>
       <div>({ user.age })</div>
-      <button className="btn btn-del" onClick={() => deleteHandler(user.id) }>삭제하기</button>
+      <CustomButton color="white" className="btn btn-del" onClick={() => handleDelete(user.id)}>
+      삭제하기
+      </CustomButton>
     </div>
   )
 }
@@ -31,17 +49,29 @@ function App() {
   const [id, setId] = useState(users.length + 1);
 
   // 유저 추가 핸들러
-  const addUserHandler = () => {
-    setId(id + 1);
+  const addUserHandler = (prevUsers) => {
+    // id를 직접 증가시키는 방식은 비동기 상태 업데이트에 문제가 있을 수 있다.
+    // setId(id + 1)을 호출할 때 id의 최신 값이 아닐 수 있기 때문에,
+    // 여러 번 호출될 경우 같은 id를 가지는 유저가 추가될 수 있다.
+    
 
-    const newUser = {
-      id: id,
-      age: age,
-      name: name,
-    };
+    // 콜백 함수
+    setUsers((prevUsers) => {
+      const newUser = {
+        id: prevUsers.length > 0 ? prevUsers[prevUsers.length - 1].id + 1 : 1,
+        age: age,
+        name: name,
+      };
+  
+      return [...prevUsers, newUser];
+    });
+    
+    setId((prevId) => prevId + 1);
 
-    setUsers([...users, newUser]);
-  }
+    // input 태그 초기화
+    setName('');
+    setAge('');
+  };
 
   // 유저 삭제 핸들러
   const deleteUserHandler = (id) => {
@@ -62,11 +92,11 @@ function App() {
         // input event로 들어온 입력값을 age의 값으로 업데이트
         onChange={(e) => setAge(e.target.value)}
         />
-        <button className="btn btn-add" onClick={addUserHandler} >추가하기</button>
+        <CustomButton className={"btn btn-add"} onClick={addUserHandler} >추가하기</CustomButton>
       </div>
       <div className="style">
         {users.map((user) => {
-          return <Square user={user} key={user.id} deleteHandler={deleteUserHandler} />;
+          return <User user={user} key={user.id} handleDelete={deleteUserHandler} />;
         })}
       </div>
     </div>
