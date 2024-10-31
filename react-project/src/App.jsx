@@ -17,18 +17,20 @@ import './App.css'                            // CSS 파일
 function App() {
   /* <---- 컴포넌트 안 ----> */
 
-  // state 구현
-  const [name, setName] = useState("홍길동");
+  // input 값을 넣을 value라는 state 생성
+  const [value, setValue] = useState("");
 
-  function onClickHandler() {
-    console.log("버튼 클릭");
-    setName("전우치");
-  }
+  // 사용자의 input 값을 state로 관리함
+  const onChangeHandler = (event) => {
+    const inputValue = event.target.value;
+    setValue(inputValue);
+  };
+
+  console.log(value);
 
   return (
     <div>
-      <h2>{name}</h2>
-      <button onClick={onClickHandler}>버튼</button>
+      <input type="text" onChange={onChangeHandler} value={value}/>
     </div>
   )
 }
