@@ -14,40 +14,23 @@ import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
 
-function GrandParent() {
-  // 익숙한 코드
-  // const name = "동현";
-  
-  /* state 관리를 위한 코드
-   *  * useState라는 함수=기능=훅을 이용하여 state를 만들기
-   *  * [] 빈 배열 생성, 첫 번째 자리에 state 이름, 두 번째 자리에 `set + state 이름`
-   *  * useState() 인자로는 초기값 initial state 전달
-  */
-  const [name, setName] = useState("동현");   
-  return <Parent grandParentName={name} setName={setName} />
-}
-
-function Parent(props) {
-  return <Child grandParentName={props.grandParentName} setName={props.setName} />;
-}
-
-function Child(props) {
-  return (
-    <div>
-      <button onClick={()=> {
-        // setName을 통해서 바꾼 값은 어디에 저장되는 것이 아니기 때문에
-        // 단순히 화면에서만 바뀐 값으로 다시 렌더링된다.
-        props.setName("병찬");
-      }}>할아버지 이름 바꾸기
-      </button>
-      <div>할아버지 이름은 {props.grandParentName}입니다.</div>
-    </div>
-  )
-}
-
 function App() {
   /* <---- 컴포넌트 안 ----> */
-  return <GrandParent />
+
+  // state 구현
+  const [name, setName] = useState("홍길동");
+
+  function onClickHandler() {
+    console.log("버튼 클릭");
+    setName("전우치");
+  }
+
+  return (
+    <div>
+      <h2>{name}</h2>
+      <button onClick={onClickHandler}>버튼</button>
+    </div>
+  )
 }
 
 // 컴포넌트 밖: 내가 만든 컴포넌트를 밖으로 내보내기 = 렌더링
