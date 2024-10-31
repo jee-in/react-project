@@ -95,9 +95,16 @@ function App() {
         <CustomButton className={"btn btn-add"} onClick={addUserHandler} >추가하기</CustomButton>
       </div>
       <div className="style">
-        {users.map((user) => {
-          return <User user={user} key={user.id} handleDelete={deleteUserHandler} />;
-        })}
+        {users
+          // .filter((user) => user.age <= 26 )
+          .map((user) => {
+            if (user.age <= 26) {
+              return null;
+            }
+
+            return <User user={user} key={user.id} handleDelete={deleteUserHandler} />;
+          })
+        }
       </div>
     </div>
   );
