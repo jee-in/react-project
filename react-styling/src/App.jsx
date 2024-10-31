@@ -3,33 +3,33 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+function Square({ user, style }) {
+  return (
+    <div className="squareStyle" id= { user.key }>
+      { user.name }
+
+    </div>
+  )
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+
+  const users = [
+    { id: 1, age: 27, name: "기메다" },
+    { id: 2, age: 26, name: "최지인" },
+    { id: 3, age: 26, name: "여누팍" },
+    { id: 4, age: 27, name: "동동" },
+    { id: 5, age: 25, name: "오지니" },
+    { id: 6, age: 25, name: "옹심이" },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="style">
+      {users.map((user) => {
+        return <Square user={user} key={user.id}/>;
+      })}
+    </div>
+  );
 }
 
 export default App
