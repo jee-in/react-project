@@ -1,12 +1,17 @@
 import { useState } from 'react'
-
-// styled-components에서 styled라는 키워드를 import한다.
-import styled from "styled-components";
+import GlobalStyle from "./components/GlobalStyle.jsx";
+import TestPage from "./components/TestPage.jsx";
 
 function App() {
-    return (
+  const title = "전역 스타일링 제목";
+  const contents = "전역 스타일링 내용";
 
-    )
-  };
+  return (
+    <>
+      <GlobalStyle />
+      <TestPage title={title} contents={contents} />
+    </>
+  )
+};
 
 export default App
