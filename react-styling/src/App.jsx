@@ -1,5 +1,6 @@
 import "./App.css";
 import HeavyComponent from "./components/HeavyComponent";
+import ObjectComponent from './components/ObjectComponent';
 
 function App() {
   const navStyleObj = {
@@ -15,7 +16,7 @@ function App() {
   return (
     <>
       <nav style={navStyleObj}>네비게이션 바</nav>
-      <HeavyComponent />
+      <ObjectComponent />
       <footer style={footerStyleObj}>푸터 영역이에요</footer>
     </>
   );
