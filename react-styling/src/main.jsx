@@ -3,10 +3,16 @@ import App from './App.jsx'
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 
+// redux 관련
+import store from "./redux/config/configStore.jsx";
+import { Provider } from "react-redux";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </StrictMode>,
 );
 
