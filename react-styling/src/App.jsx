@@ -13,6 +13,11 @@ function App() {
 
   const [count, setCount] = useState(0);
 
+  // count를 초기화해주는 함수
+  const initCount = () => {
+    setCount(0);
+  };
+
   // 1을 증가시키는 함수
   const onPlusButtonClickHandler = () => {
     setCount(count + 1);
@@ -30,7 +35,7 @@ function App() {
       <button onClick={onPlusButtonClickHandler}>+</button>
       <button onClick={onMinusButtonClickHandler}>-</button>
       <div style={boxesStyle}>
-        <Box1 />
+        <Box1 initCount={initCount} />
         <Box2 />
         <Box3 />
       </div>
