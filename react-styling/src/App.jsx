@@ -1,25 +1,11 @@
-import "./App.css";
-import HeavyComponent from "./components/HeavyComponent";
-import ObjectComponent from './components/ObjectComponent';
+import React from "react";
+import { useSelector } from "react-redux";
 
-function App() {
-  const navStyleObj = {
-    backgroundColor: "yellow",
-    marginBottom: "30px",
-  };
+const App = () => {
+  const counterStore = useSelector((state) => state); // 추가해주세요.
+  console.log(counterStore); // 스토어를 조회해볼까요?
 
-  const footerStyleObj = {
-    backgroundColor: "green",
-    marginTop: "30px",
-  };
-
-  return (
-    <>
-      <nav style={navStyleObj}>네비게이션 바</nav>
-      <ObjectComponent />
-      <footer style={footerStyleObj}>푸터 영역이에요</footer>
-    </>
-  );
+  return <div></div>;
 }
 
 export default App;
