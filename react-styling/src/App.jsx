@@ -1,32 +1,32 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// 사용할 Action creator를 import
-import { minusOne, plusOne } from "./redux/modules/counter";
+import { addNumber } from "./redux/modules/counter";
 
 const App = () => {
-  const dispatch = useDispatch(); // dispatch 함수 생성
-  
-  const number = useSelector((state) => state.counter.number);
+  const dispatch = useDispatch();
+  const [number, setNumber] = useState(0);
+  const globalNumber = useSelector((state) => state.counter.number);
+
+  const onChangeHandler = (event) => {
+    const { value } = event.target;
+    // event.target.value는 문자열이다. 이것을 숫자형으로 형 변환해주기 위해 +를 붙여주었다.
+    setNumber(+value);
+  };
+
+  const onClickAddNumberHandler = () => {
+    dispatch(addNumber(number));
+  };
+
   console.log(number);
 
   return (
     <div>
-      {number}
-      <button
-        onClick={() => {
-          dispatch(plusOne());  // 액션 객체를 Action Creator로 변경
-        }}
-      >
-        + 1
-      </button>
-      <button
-        onClick={() => {
-          dispatch(minusOne()); // 액션 객체를 Action Creator로 변경
-        }}
-      >
-        - 1
-      </button>
+      <div>{globalNumber}</div>
+      <input type="number" onChange={onChangeHandler} />
+      <button onClick={onClickAddNumberHandler}>더하기</button>
+      <button>빼기</button>
     </div>
   );
 };
