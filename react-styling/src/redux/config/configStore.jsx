@@ -1,8 +1,6 @@
 import { createStore } from "redux";
 import { combineReducers } from "redux";
 
-import counter from "../modules/counter";
-
 /*
 1. createStore()
 리덕스의 가장 핵심이 되는 스토어를 만드는 메소드(함수) 입니다. 
@@ -17,13 +15,8 @@ import counter from "../modules/counter";
 combineReducers은 여러 개의 독립적인 reducer의 반환 값을 하나의 상태 객체로 만들어줍니다.
 */
 
-// const rootReducer = combineReducers({
-//   counter: counter,
-// }); 
-// const store = createStore(rootReducer); 
-
 const rootReducer = combineReducers({
-  counter: counter,
+
 }); 
 const store = createStore(rootReducer);
 
