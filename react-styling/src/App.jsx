@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addNumber } from "./redux/modules/counter";
+import { subNumber } from "./redux/modules/counter";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,10 @@ const App = () => {
     dispatch(addNumber(number));
   };
 
+  const onClickSubNumberHandler = () => {
+    dispatch(subNumber(number));
+  };
+
   console.log(number);
 
   return (
@@ -26,7 +31,7 @@ const App = () => {
       <div>{globalNumber}</div>
       <input type="number" onChange={onChangeHandler} />
       <button onClick={onClickAddNumberHandler}>더하기</button>
-      <button>빼기</button>
+      <button onClick={onClickSubNumberHandler}>빼기</button>
     </div>
   );
 };
