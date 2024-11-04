@@ -1,7 +1,7 @@
 /* <---- 컴포넌트 밖 ----> */
 
 // 내가 필요한 파일을 import하기 
-import { useState } from 'react'              // js 파일
+import { useEffect, useState } from 'react'              // js 파일
 import reactLogo from './assets/react.svg'    // 이미지 파일
 import viteLogo from '/vite.svg'
 import './App.css'                            // CSS 파일
@@ -38,6 +38,21 @@ const fetchData = async () => {
 function App() {
   /* <---- 컴포넌트 안 ----> */
   const [number, setNumber] = useState(0);
+  // 가짜 서버
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => {
+        console.log("통신 성공");
+        return response.json();
+      })
+      .then((json) => {
+        console.log("json 가져오기 성공");
+        setData([...json]);
+      });
+  }, []);
+
   return (
     <div>
       <h2>타이머</h2>
@@ -49,6 +64,26 @@ function App() {
       <h2>비동기 통신</h2>
       <div>
         <Button content={ "api 요청" } clickEventHandler={fetchData}/>
+      </div>
+      <div style={{ textAlign: 'left' }}>
+        {data.map((item) => {
+          return (
+            <div
+              style={{
+                border: "1px solid black",
+                margin: "3px",
+              }}
+              key={item.id}
+            >
+              <ul>
+                <li>userId : {item.userId}</li>
+                <li>id : {item.id}</li>
+                <li>title : {item.title}</li>
+                <li>body : {item.body}</li>
+              </ul>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
