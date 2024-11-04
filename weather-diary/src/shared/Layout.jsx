@@ -1,6 +1,5 @@
-// src/shared/Layout.js
-
 import React from 'react';
+import styled from "styled-components";
 
 const StDiaryContainer = styled.section`
   max-width: 1440px;
@@ -19,7 +18,7 @@ const HeaderStyles = {
 };
 const FooterStyles = {
   width: '100%',
-  height: '50px',
+  height: '100px',
   display: 'flex',
   background: 'black',
   color: 'white',
