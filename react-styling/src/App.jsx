@@ -3,13 +3,16 @@ import styled from "styled-components";
 import GlobalStyle from './components/GlobalStyle';
 import CreateForm from './components/CreateForm';
 import TodoListContainer from './components/TodoListContainer';
+import Router from "./shared/Router.jsx";
 
 const App = () => {
   return (
-    <StContainer>
-      <CreateForm />
-      <TodoListContainer />
-    </StContainer>
+    // <StContainer>
+    //   <CreateForm />
+    //   <TodoListContainer />
+
+    // </StContainer>
+    <Router />
   );
 };
 
